@@ -142,7 +142,7 @@ float rotHelHelY = 0.0;
 
 // Var animate lambo dor
 int stateDoor = 0;
-float dorRotCount = 0.0;
+float doorRotCount = 0.0;
 
 double deltaTime;
 double currTime, lastTime;
@@ -798,7 +798,7 @@ void applicationLoop() {
 		glActiveTexture(GL_TEXTURE0);
 		glm::mat4 modelMatrixLamboLeftDor = glm::mat4(modelMatrixLamboChasis);
 		modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(1.08676, 0.707316, 0.982601));
-		modelMatrixLamboLeftDor = glm::rotate(modelMatrixLamboLeftDor, glm::radians(dorRotCount), glm::vec3(1.0, 0, 0));
+		modelMatrixLamboLeftDor = glm::rotate(modelMatrixLamboLeftDor, glm::radians(doorRotCount), glm::vec3(1.0, 0, 0));
 		modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(-1.08676, -0.707316, -0.982601));
 		modelLamboLeftDor.render(modelMatrixLamboLeftDor);
 		modelLamboRightDor.render(modelMatrixLamboChasis);
@@ -953,14 +953,14 @@ void applicationLoop() {
 		// State machine for the lambo car
 		switch(stateDoor){
 		case 0:
-			dorRotCount += 0.5;
-			if(dorRotCount > 75)
+			doorRotCount += 0.5;
+			if(doorRotCount > 75)
 				stateDoor = 1;
 			break;
 		case 1:
-			dorRotCount -= 0.5;
-			if(dorRotCount < 0){
-				dorRotCount = 0.0;
+			doorRotCount -= 0.5;
+			if(doorRotCount < 0){
+				doorRotCount = 0.0;
 				stateDoor = 0;
 			}
 			break;
