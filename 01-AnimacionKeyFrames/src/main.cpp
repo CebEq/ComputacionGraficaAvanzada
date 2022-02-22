@@ -64,6 +64,7 @@ Model modelEclipseRearWheels;
 Model modelEclipseFrontalWheels;
 Model modelHeliChasis;
 Model modelHeliHeli;
+Model modelHeliHeliRear;
 Model modelLambo;
 Model modelLamboLeftDor;
 Model modelLamboRightDor;
@@ -291,6 +292,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelHeliChasis.setShader(&shaderMulLighting);
 	modelHeliHeli.loadModel("../models/Helicopter/Mi_24_heli.obj");
 	modelHeliHeli.setShader(&shaderMulLighting);
+	modelHeliHeliRear.loadModel("../models/Helicopter/Mi_24_heli_rear.obj");
+	modelHeliHeliRear.setShader(&shaderMulLighting);
 	// Lamborginhi
 	modelLambo.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_chasis.obj");
 	modelLambo.setShader(&shaderMulLighting);
@@ -595,6 +598,7 @@ void destroy() {
 	modelEclipseRearWheels.destroy();
 	modelHeliChasis.destroy();
 	modelHeliHeli.destroy();
+	modelHeliHeliRear.destroy();
 	modelLambo.destroy();
 	modelLamboFrontLeftWheel.destroy();
 	modelLamboFrontRightWheel.destroy();
@@ -1124,10 +1128,16 @@ void applicationLoop() {
 		modelHeliChasis.render(modelMatrixHeliChasis);
 
 		glm::mat4 modelMatrixHeliHeli = glm::mat4(modelMatrixHeliChasis);
-		modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
+		modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(-0.012319, 1.74135, -0.249548));
 		modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelY, glm::vec3(0, 1, 0));
-		modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
+		modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0123190, -1.74135, 0.249548));
 		modelHeliHeli.render(modelMatrixHeliHeli);
+
+		glm::mat4 modelMatrixHeliHeliRear = glm::mat4(modelMatrixHeliChasis);
+		modelMatrixHeliHeliRear = glm::translate(modelMatrixHeliHeliRear, glm::vec3(0.331073, 2.09374, -5.64979));
+		modelMatrixHeliHeliRear = glm::rotate(modelMatrixHeliHeliRear, rotHelHelY, glm::vec3(1, 0, 0));
+		modelMatrixHeliHeliRear = glm::translate(modelMatrixHeliHeliRear, glm::vec3(-0.331073, -2.09374, 5.64979));
+		modelHeliHeliRear.render(modelMatrixHeliHeliRear);
 
 		// Lambo car
 		glDisable(GL_CULL_FACE);
